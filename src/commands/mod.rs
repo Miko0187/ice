@@ -77,16 +77,17 @@ impl CommandHolder {
     }
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize)]
 pub struct Package {
     name: String,
     description: String,
     version: String,
     #[serde(rename = "dist")]
     distribution: Distribution,
+    dependencies: Option<HashMap<String, String>>,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize)]
 pub struct Distribution {
     #[serde(rename = "tarball")]
     tarball_url: String,
