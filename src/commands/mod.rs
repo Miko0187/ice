@@ -1,9 +1,12 @@
 use std::vec;
-use hashbrown::HashMap;
+use std::collections::HashMap;
+use serde::Deserialize;
 
 use crate::cli::ArgParse;
 
 pub mod install;
+
+pub const NPM_REGISTRY: &str = "https://registry.npmjs.org/";
 
 #[derive(Clone)]
 pub struct Command {
@@ -74,7 +77,22 @@ impl CommandHolder {
     }
 }
 
-pub fn init() -> CommandHolder {
+#[derive(Deserialize, Debug)]
+pub struct Package {
+    name: String,
+    description: String,
+    version: String,
+    #[serde(rename = "dist")]
+    distribution: Distribution,
+}
+
+#[derive(Deserialize, Debug)]
+pub struct Distribution {
+    #[serde(rename = "tarball")]
+    tarball_url: String,
+}
+
+pub fn init() -> CommandHolder { 
     let mut commands: Vec<Command> = Vec::new();
     
     commands.push(Command::new(

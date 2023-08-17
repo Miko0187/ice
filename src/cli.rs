@@ -1,5 +1,4 @@
 use crate::{
-    // Macro imports
     throw, 
     error,
     _color_output
