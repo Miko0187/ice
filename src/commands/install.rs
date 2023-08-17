@@ -2,6 +2,7 @@ use crate::{
     // Macro imports
     throw,
     error,
+    info,
     _color_output,
     // Module imports
     cli::ArgParse, 
@@ -12,5 +13,7 @@ pub fn run(args: ArgParse) {
     if package.is_none() {
         throw!("No package provided");
     }
-    println!("Installing {}", package.unwrap());
+    info!("Installing package: {}", package.unwrap());
+
+    
 }
